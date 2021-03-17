@@ -8,13 +8,11 @@ class SamlController < ApplicationController
 
   def consume
     saml_response = Base64.decode64(params[:SAMLResponse])
-    response = OneLogin::RubySaml::Response.new(saml_response, settings: @account.saml_attributes,
-                                                               skip_subject_confirmation: true)
+    response = OneLogin::RubySaml::Response.new(saml_response, settings: @account.saml_attributes, skip_subject_confirmation: true)
 
     if response.is_valid?
       user = User.find_by(email: response.nameid)
       sign_in(user: user)
-
       redirect_to root_path
     else
       logger.error response.errors

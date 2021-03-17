@@ -10,8 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def check_signed_in
-    p @current_user
-    p current_user
     redirect_to new_sessions_path unless signed_in?
   end
 
@@ -22,7 +20,6 @@ class ApplicationController < ActionController::Base
   def sign_in(user:)
     @current_user = user
     session[:user_id] = @current_user.id
-    p @current_user
   end
 
   def sign_out

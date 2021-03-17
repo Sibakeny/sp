@@ -3,10 +3,11 @@
 class Account < ApplicationRecord
   include Rails.application.routes.url_helpers
 
-  has_one :saml_setting
+  has_one :saml_setting, dependent: :destroy
+
+  after_create :create_saml_setting
 
   def saml_attributes(user: nil)
-
     settings = OneLogin::RubySaml::Settings.new
 
     settings.name_identifier_value_requested = user.email if user.present?
@@ -19,8 +20,8 @@ class Account < ApplicationRecord
     settings.idp_sso_service_url            = saml_setting.sso_url
     settings.idp_slo_service_url            = saml_setting.slo_url
     settings.idp_cert                       = saml_setting.x509_certificate
-    # settings.idp_cert_fingerprint           = saml_setting.certificate_fingerprint
-    # settings.idp_cert_fingerprint_algorithm = saml_setting.certificate_fingerprint_algorithm
+    settings.idp_cert_fingerprint           = saml_setting.certificate_fingerprint
+    settings.idp_cert_fingerprint_algorithm = saml_setting.certificate_fingerprint_algorithm
     settings.name_identifier_format         = saml_setting.name_id_format
 
     # Optional for most SAML IdPs
@@ -36,5 +37,11 @@ class Account < ApplicationRecord
     settings.assertion_consumer_service_binding = saml_setting.sso_http_binding
 
     settings
+  end
+
+  private
+
+  def create_saml_setting
+    SamlSetting.create!(account_id: id)
   end
 end

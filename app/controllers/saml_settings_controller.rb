@@ -2,15 +2,15 @@
 
 class SamlSettingsController < ApplicationController
   def show
-    @saml_setting = SamlSetting.find_or_create_by(account_id: current_user.account_id)
+    @saml_setting = SamlSetting.find_by!(account_id: current_user.account_id)
   end
 
   def edit
-    @saml_setting = SamlSetting.find_or_create_by(account_id: current_user.account_id)
+    @saml_setting = SamlSetting.find_by!(account_id: current_user.account_id)
   end
 
   def update
-    @saml_setting = SamlSetting.find_by(account_id: current_user.account_id)
+    @saml_setting = SamlSetting.find_by!(account_id: current_user.account_id)
 
     @saml_setting.update(saml_setting_params)
   end
