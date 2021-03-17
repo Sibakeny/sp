@@ -1,2 +1,0 @@
-class SpSetting < ApplicationRecord
-end

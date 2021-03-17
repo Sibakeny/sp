@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_075141) do
+ActiveRecord::Schema.define(version: 2021_03_17_022506) do
 
-  create_table "sp_settings", force: :cascade do |t|
+  create_table "accounts", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "saml_settings", force: :cascade do |t|
     t.string "sso_url"
     t.string "slo_url"
     t.string "x509_certificate"
@@ -22,18 +28,21 @@ ActiveRecord::Schema.define(version: 2021_03_16_075141) do
     t.string "sso_http_binding"
     t.string "slo_http_binding"
     t.string "authn_context"
+    t.string "entity_id"
+    t.integer "saml_status", default: 0
+    t.integer "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
-    t.string "entity_id"
-    t.index ["user_id"], name: "index_sp_settings_on_user_id"
+    t.index ["account_id"], name: "index_saml_settings_on_account_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "name"
+    t.integer "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_users_on_account_id"
   end
 
 end

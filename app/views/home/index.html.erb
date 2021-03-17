@@ -1,0 +1,9 @@
+<p>saml_setting: <%= link_to '詳細', saml_settings_path %></p>
+
+<p>user: <%= link_to '詳細', user_path(@current_user) %>
+
+<p>account: <%= link_to '詳細', accounts_path %></p>
+
+<div>
+  <%= button_to 'ログアウト', sessions_path, method: :delete %>
+</div>

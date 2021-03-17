@@ -1,17 +1,18 @@
-class User < ApplicationRecord
-  has_one :sp_setting
+# frozen_string_literal: true
 
+class User < ApplicationRecord
+  belongs_to :account
 end
-# settings.idp_entity_id                  = sp_setting.entity_id
-# settings.idp_sso_service_url            = sp_setting.sso_url
-# settings.idp_slo_service_url            = sp_setting.slo_url
-# settings.idp_cert_fingerprint           = sp_setting.certificate_fingerprint
-# settings.idp_cert_fingerprint_algorithm = sp_setting.certificate_fingerprint_algorithm
-# settings.name_identifier_format         = sp_setting.name_id_format
+# settings.idp_entity_id                  = saml_setting.entity_id
+# settings.idp_sso_service_url            = saml_setting.sso_url
+# settings.idp_slo_service_url            = saml_setting.slo_url
+# settings.idp_cert_fingerprint           = saml_setting.certificate_fingerprint
+# settings.idp_cert_fingerprint_algorithm = saml_setting.certificate_fingerprint_algorithm
+# settings.name_identifier_format         = saml_setting.name_id_format
 
 # # Optional for most SAML IdPs
-# settings.authn_context = sp_setting.authn_context
-# 
+# settings.authn_context = saml_setting.authn_context
+#
 # # or as an array
 # settings.authn_context = [
 #   "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
@@ -19,8 +20,8 @@ end
 # ]
 
 # Optional bindings (defaults to Redirect for logout POST for acs)
-# settings.single_logout_service_binding      = sp_setting.slo_http_binding
-# settings.assertion_consumer_service_binding = sp_setting.sso_http_binding
+# settings.single_logout_service_binding      = saml_setting.slo_http_binding
+# settings.assertion_consumer_service_binding = saml_setting.sso_http_binding
 
 #   settings = OneLogin::RubySaml::Settings.new
 

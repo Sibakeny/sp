@@ -1,0 +1,33 @@
+<%= form_with model: @saml_setting, url: saml_settings_path do |f| %>
+  <%= f.label :sso_url %>
+  <%= f.text_field :sso_url %>
+
+  <%= f.label :entity_id %>
+  <%= f.text_field :entity_id %>
+
+  <%= f.label :certificate_fingerprint %>
+  <%= f.text_field :certificate_fingerprint %>
+
+  <%= f.label :certificate_fingerprint_algorithm %>
+  <%= f.text_field :certificate_fingerprint_algorithm %>
+
+  <%= f.label :name_id_format %>
+  <%= f.text_field :name_id_format %>
+
+  <%= f.label :authn_context %>
+  <%= f.text_field :authn_context %>
+
+  <%= f.label :slo_http_binding %>
+  <%= f.text_field :slo_http_binding %>
+
+  <%= f.label :sso_http_binding %>
+  <%= f.text_field :sso_http_binding %>
+
+  <%= f.label :x509_certificate %>
+  <%= f.text_field :x509_certificate %>
+
+  <%= f.label :saml_status %>
+  <%= f.select :saml_status, SamlSetting.saml_statuses.keys%>
+
+  <%= f.submit %>
+<% end %>

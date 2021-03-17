@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>sso_url:</strong>
+  <%= @saml_setting.sso_url %>
+</p>
+
+<p>
+  <strong>entity_id:</strong>
+  <%= @saml_setting.entity_id %>
+</p>
+
+<p>
+  <strong>certificate_fingerprint:</strong>
+  <%= @saml_setting.certificate_fingerprint %>
+</p>
+
+<p>
+  <strong>certificate_fingerprint_algorithm:</strong>
+  <%= @saml_setting.certificate_fingerprint_algorithm %>
+</p>
+
+<p>
+  <strong>name_id_format:</strong>
+  <%= @saml_setting.name_id_format %>
+</p>
+
+<p>
+  <strong>authn_context:</strong>
+  <%= @saml_setting.authn_context %>
+</p>
+
+<p>
+  <strong>slo_http_binding:</strong>
+  <%= @saml_setting.slo_http_binding %>
+</p>
+
+<p>
+  <strong>sso_http_binding:</strong>
+  <%= @saml_setting.sso_http_binding %>
+</p>
+
+<p>
+  <strong>x509_certificate:</strong>
+  <%= @saml_setting.x509_certificate %>
+</p>
+
+<p>
+  <strong>saml_status:</strong>
+  <%= @saml_setting.saml_status %>
+</p>
+
+
+<%= link_to 'Edit', edit_saml_settings_path %> |
