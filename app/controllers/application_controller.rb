@@ -3,7 +3,25 @@
 class ApplicationController < ActionController::Base
   before_action :check_signed_in
 
-  private
+  # samlで認証リクエスト
+  def request_auth_request(user)
+    request = OneLogin::RubySaml::Authrequest.new
+    redirect_to(request.create(user.account.saml_attributes(user: user)))
+  end
+
+  # saml responseを検証しログイン
+  def saml_authenticate_user!
+    saml_response = Base64.decode64(params[:SAMLResponse])
+    response = OneLogin::RubySaml::Response.new(saml_response, settings: @account.saml_attributes, skip_subject_confirmation: true)
+
+    if response.is_valid?
+      user = User.find_by(email: response.nameid)
+      sign_in(user: user)
+      redirect_to root_path
+    else
+      raise response.errors.join(',')
+    end
+  end
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])

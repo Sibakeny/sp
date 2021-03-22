@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,37 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_317_022_506) do
-  create_table 'accounts', force: :cascade do |t|
-    t.string 'name'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+ActiveRecord::Schema.define(version: 2021_03_17_022506) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'saml_settings', force: :cascade do |t|
-    t.string 'sso_url'
-    t.string 'slo_url'
-    t.string 'x509_certificate'
-    t.string 'certificate_fingerprint'
-    t.string 'certificate_fingerprint_algorithm'
-    t.string 'name_id_format'
-    t.string 'sso_http_binding'
-    t.string 'slo_http_binding'
-    t.string 'authn_context'
-    t.string 'entity_id'
-    t.integer 'saml_status', default: 0
-    t.integer 'account_id'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['account_id'], name: 'index_saml_settings_on_account_id'
+  create_table "saml_settings", force: :cascade do |t|
+    t.string "sso_url"
+    t.string "slo_url"
+    t.string "x509_certificate"
+    t.string "certificate_fingerprint"
+    t.string "certificate_fingerprint_algorithm"
+    t.string "entity_id"
+    t.integer "status", default: 0
+    t.integer "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_saml_settings_on_account_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'email'
-    t.string 'name'
-    t.integer 'account_id'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['account_id'], name: 'index_users_on_account_id'
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "name"
+    t.integer "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_users_on_account_id"
   end
+
 end

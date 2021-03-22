@@ -2,7 +2,11 @@
 
 <p>user: <%= link_to '詳細', user_path(@current_user) %>
 
-<p>account: <%= link_to '詳細', accounts_path %></p>
+<% if @current_user.account.present? %>
+  <p>account: <%= link_to '詳細', account_path(@current_user.account) %></p>
+<% else %>
+  <p>account: <%= link_to '作成', new_account_path %></p>
+<% end %>
 
 <div>
   <%= button_to 'ログアウト', sessions_path, method: :delete %>

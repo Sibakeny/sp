@@ -7,21 +7,12 @@ class SamlController < ApplicationController
   before_action :set_account
 
   def consume
-    saml_response = Base64.decode64(params[:SAMLResponse])
-    response = OneLogin::RubySaml::Response.new(saml_response, settings: @account.saml_attributes, skip_subject_confirmation: true)
-
-    if response.is_valid?
-      user = User.find_by(email: response.nameid)
-      sign_in(user: user)
-      redirect_to root_path
-    else
-      logger.error response.errors
-    end
+    saml_authenticate_user
   end
 
   def metadata
     meta = OneLogin::RubySaml::Metadata.new
-    render xml: meta.generate(@account.saml_attributes), content_type: 'application/samlmetadata+xml'
+    send_data meta.generate(@account.saml_attributes), type: 'application/samlmetadata+xml', filename: 'metadata.xml'
   end
 
   private

@@ -7,18 +7,15 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:email])
-    @account = @user.account
 
-    if @account.saml_setting.inactive?
-      if @user.present?
-        sign_in(user: @user)
-        redirect_to users_path
-      else
-        render :new, alert: 'ログイン失敗'
-      end
+    # saml設定がアクティブの場合はauthn requestを出す
+    request_auth_request(@user) and return if @user.present? && @user.account.saml_setting.active?
+
+    if @user.present?
+      sign_in(user: @user)
+      redirect_to root_path
     else
-      request = OneLogin::RubySaml::Authrequest.new
-      redirect_to(request.create(@account.saml_attributes(user: @user)))
+      render :new, alert: 'ログイン失敗'
     end
   end
 

@@ -1,5 +1,28 @@
 <p id="notice"><%= notice %></p>
 
+<h2>SP Setting</h2>
+<p>
+  <strong>ACS_URL:</strong>
+  <%= saml_sso_url(@account) %>
+</p>
+
+<p>
+  <strong>SP_ENTITY_ID:</strong>
+  <%= saml_metadata_url(@account) %>
+</p>
+
+<p>
+  <strong>
+</p>
+
+<p>
+  <strong>MetaData:</strong>
+  <%= link_to 'ダウンロード', saml_metadata_path(@account) %>
+</p>
+
+<div style="border: 1px solid gray;"></div>
+
+<h2>IdP Setting</h2>
 <p>
   <strong>sso_url:</strong>
   <%= @saml_setting.sso_url %>
@@ -21,34 +44,16 @@
 </p>
 
 <p>
-  <strong>name_id_format:</strong>
-  <%= @saml_setting.name_id_format %>
-</p>
-
-<p>
-  <strong>authn_context:</strong>
-  <%= @saml_setting.authn_context %>
-</p>
-
-<p>
-  <strong>slo_http_binding:</strong>
-  <%= @saml_setting.slo_http_binding %>
-</p>
-
-<p>
-  <strong>sso_http_binding:</strong>
-  <%= @saml_setting.sso_http_binding %>
-</p>
-
-<p>
   <strong>x509_certificate:</strong>
   <%= @saml_setting.x509_certificate %>
 </p>
 
 <p>
-  <strong>saml_status:</strong>
-  <%= @saml_setting.saml_status %>
+  <strong>status:</strong>
+  <%= @saml_setting.status %>
 </p>
+
+
 
 
 <%= link_to 'Edit', edit_saml_settings_path %> |
