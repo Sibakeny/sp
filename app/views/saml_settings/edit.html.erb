@@ -14,12 +14,6 @@
   <%= f.label :certificate_fingerprint_algorithm %>
   <%= f.text_field :certificate_fingerprint_algorithm %>
 
-  <%= f.label :slo_http_binding %>
-  <%= f.text_field :slo_http_binding %>
-
-  <%= f.label :sso_http_binding %>
-  <%= f.text_field :sso_http_binding %>
-
   <%= f.label :status %>
   <%= f.select :status, SamlSetting.statuses.keys%>
 

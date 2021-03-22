@@ -14,7 +14,7 @@ class Account < ApplicationRecord
 
     settings.issuer = saml_metadata_url(id)
 
-    settings.assertion_consumer_service_url = saml_sso_url(id)
+    settings.assertion_consumer_service_url = saml_consume_url(id)
     settings.sp_entity_id                   = saml_metadata_url(id)
     settings.idp_entity_id                  = saml_setting.entity_id
     settings.idp_sso_service_url            = saml_setting.sso_url

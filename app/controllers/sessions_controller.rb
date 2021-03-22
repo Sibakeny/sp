@@ -8,9 +8,6 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:email])
 
-    # saml設定がアクティブの場合はauthn requestを出す
-    request_auth_request(@user) and return if @user.present? && @user.account.saml_setting.active?
-
     if @user.present?
       sign_in(user: @user)
       redirect_to root_path
