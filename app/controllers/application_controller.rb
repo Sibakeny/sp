@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
     response = OneLogin::RubySaml::Response.new(saml_response, settings: @account.saml_attributes, skip_subject_confirmation: true)
 
     if response.is_valid?
+      # nameid formatの確認も挟んだ方が良い？
+      # 設定ファイルでnameidとどのモデルのどのカラムが紐づくかを記載する形でライブラリを作ることになると思う
       user = User.find_by(email: response.nameid)
       sign_in(user: user)
       redirect_to root_path
