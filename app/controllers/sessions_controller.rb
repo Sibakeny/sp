@@ -8,9 +8,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:email])
 
-    request_auth_request(@user) and return if @user.account.saml_setting.active?
-
-    if @user.present? && @user.account.saml_setting.inactive?
+    if @user.present?
       sign_in(user: @user)
       redirect_to root_path
     else
