@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_17_022506) do
+ActiveRecord::Schema.define(version: 2021_06_04_091109) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "name"
@@ -19,14 +19,10 @@ ActiveRecord::Schema.define(version: 2021_03_17_022506) do
   end
 
   create_table "saml_settings", force: :cascade do |t|
-    t.string "sso_url"
-    t.string "slo_url"
-    t.string "x509_certificate"
-    t.string "certificate_fingerprint"
-    t.string "certificate_fingerprint_algorithm"
-    t.string "entity_id"
-    t.integer "status", default: 0
-    t.integer "account_id"
+    t.integer "account_id", null: false
+    t.string "idp_sso_url"
+    t.text "idp_cert"
+    t.string "idp_entity_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_saml_settings_on_account_id"
@@ -41,4 +37,5 @@ ActiveRecord::Schema.define(version: 2021_03_17_022506) do
     t.index ["account_id"], name: "index_users_on_account_id"
   end
 
+  add_foreign_key "saml_settings", "accounts"
 end

@@ -1,3 +1,9 @@
+PATH
+  remote: ../sp-rails-saml
+  specs:
+    sp-rails-saml (0.1.0)
+      ruby-saml
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -219,6 +225,7 @@ DEPENDENCIES
   ruby-saml
   sass-rails (>= 6)
   selenium-webdriver
+  sp-rails-saml!
   spring
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
