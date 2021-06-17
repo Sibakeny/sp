@@ -25,11 +25,6 @@ class ApplicationController < ActionController::Base
   #   end
   # end
 
-  def sign_in_with_saml(user)
-    sign_in(user: user)
-    redirect_to root_path
-  end
-
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
